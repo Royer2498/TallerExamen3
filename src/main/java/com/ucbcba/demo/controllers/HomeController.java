@@ -25,7 +25,7 @@ public class HomeController {
     private final RestaurantService restaurantService;
     private final CityService cityService;
 
-    
+
     public HomeController(UserService userService, RestaurantService restaurantService, CityService cityService) {
         this.userService = userService;
         this.restaurantService = restaurantService;
