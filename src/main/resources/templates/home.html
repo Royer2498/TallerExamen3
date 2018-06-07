@@ -252,6 +252,14 @@
                         <option th:each="city : ${cities}" th:value="${city.name}"
                                 th:selected="${city.name} == ${citySelected}" th:text="${city.name}"></option>
                     </select>
+
+                    <select class="btn btn-default" id="reports" onchange="changeSearchFilter()"
+                            name="reports">
+                            <option value="top users comentaristas">top users comentaristas</option>
+                            <option value="top restaurants comentados">top restaurants comentados</option>
+                            <option value="top usuarios calificadores">top usuarios calificadores</option>
+                    </select>
+
                     <input type="hidden" id="showContent" name="showContent" th:value="${showTable}"/>
                     <input class="btn btn-default" type="submit" style="display:inline;" value="Search"/>
                 </form>
@@ -318,6 +326,14 @@
         <script async="async" defer="defer"
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyYErgX5t-pShxDcxp3FbHX4Cdnmb01f0&amp;callback=initMap">
         </script>
+
+        <div th:each="reporte : ${reportes}" class="row">
+            <div class="container">
+                <p th:text="${reporte.user.name}"> Name <span th:text="${reporte.count}"></span> veces: </p>
+            </div>
+            <br/>
+        </div>
+
     </div>
 </div>
 <div class="footer">

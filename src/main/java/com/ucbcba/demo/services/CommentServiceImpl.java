@@ -52,4 +52,14 @@ public class CommentServiceImpl implements CommentService {
         return (Iterable<Comment>)res;
     }
 
+    @Override
+    public Iterable<Comment> findComments() {
+        return commentRepository.findComments();
+    }
+
+    @Override
+    public Iterable<Comment> findComments2() {
+        return commentRepository.findComments2();
+    }
+
 }

@@ -32,6 +32,8 @@ public class Comment {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    private Integer count;
+
     public Comment(){
     }
 
@@ -86,5 +88,13 @@ public class Comment {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

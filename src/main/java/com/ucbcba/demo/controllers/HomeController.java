@@ -2,8 +2,10 @@ package com.ucbcba.demo.Controllers;
 
 import com.ucbcba.demo.entities.Category;
 import com.ucbcba.demo.entities.City;
+import com.ucbcba.demo.entities.Comment;
 import com.ucbcba.demo.entities.Restaurant;
 import com.ucbcba.demo.services.CityService;
+import com.ucbcba.demo.services.CommentService;
 import com.ucbcba.demo.services.RestaurantService;
 import com.ucbcba.demo.services.UserService;
 import org.springframework.security.core.Authentication;
@@ -24,20 +26,32 @@ public class HomeController {
     private final UserService userService;
     private final RestaurantService restaurantService;
     private final CityService cityService;
+    private final CommentService commentService;
 
 
-    public HomeController(UserService userService, RestaurantService restaurantService, CityService cityService) {
+    public HomeController(UserService userService, RestaurantService restaurantService, CityService cityService,CommentService commentService) {
         this.userService = userService;
         this.restaurantService = restaurantService;
         this.cityService = cityService;
+        this.commentService = commentService;
     }
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public String welcome(Model model, @RequestParam(value = "searchFilter", required = false, defaultValue = "") String searchFilter, @RequestParam(value = "cityDropdown", required = false, defaultValue = "") String cityDropdown, @RequestParam(value = "showContent", required = false, defaultValue = "") String showContent) {
+    public String welcome(Model model, @RequestParam(value = "searchFilter", required = false, defaultValue = "") String searchFilter, @RequestParam(value = "cityDropdown", required = false, defaultValue = "") String cityDropdown, @RequestParam(value = "showContent", required = false, defaultValue = "") String showContent,@RequestParam(value = "reports", required = false, defaultValue = "") String reports) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Boolean logged = (!getUserRole(auth).equals("notLogged"));
         com.ucbcba.demo.entities.User user = new com.ucbcba.demo.entities.User();
         User u;
+
+        if(reports.equals("top users comentaristas"))
+        {
+            model.addAttribute("reportes",commentService.findComments());
+        }
+        if(reports.equals("top restaurants comentados"))
+        {
+            model.addAttribute("reportes",commentService.findComments2());
+        }
+
         if (logged) {
             u = (org.springframework.security.core.userdetails.User) auth.getPrincipal();
             user = userService.findByUsername(u.getUsername());

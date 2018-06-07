@@ -46,6 +46,7 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
     private List<Photo> photo;
 
+
     public List<Comment> getComments() {
         return comments;
     }
@@ -125,4 +126,6 @@ public class Restaurant {
     public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
+
+
 }

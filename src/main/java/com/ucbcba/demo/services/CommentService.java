@@ -2,6 +2,8 @@ package com.ucbcba.demo.services;
 
 import com.ucbcba.demo.entities.Comment;
 
+import java.util.List;
+
 public interface CommentService {
 
     Iterable<Comment> listAllComments();
@@ -14,4 +16,7 @@ public interface CommentService {
 
     Iterable<Comment> listAllCommentsByUser(Integer userId);
 
+    Iterable<Comment> findComments();
+
+    Iterable<Comment> findComments2();
 }
